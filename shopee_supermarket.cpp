@@ -4,7 +4,7 @@
 
 using namespace std;
 
-shopee_SuperMarket{
+shopee_SuperMarket() {
 
     //groceries and price 
 }
