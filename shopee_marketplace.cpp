@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void shopee_MarketPlace{
+void shopee_MarketPlace() {
 
 //items with prices
 
