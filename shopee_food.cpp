@@ -5,7 +5,7 @@ include "services.h"
 using namespace std;
 
 
-void shopee_Food{
+void shopee_Food() {
 
     //menus stuff with prices
 
