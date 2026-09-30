@@ -283,7 +283,63 @@ int main() {
                 }
 
                 double subtotal = price * quantity;
-                double total = subtotal + deliveryFee;
+                double discount = 0.00;
+                string voucherName = "None";
+                char voucher;
+
+                cout << "\nCart subtotal: RM" << subtotal << '\n';
+                cout << "Do you want to use a voucher? (Y/N): ";
+                cin >> voucher;
+
+                if (voucher == 'Y' || voucher == 'y') {
+                    int voucherOption;
+
+                    cout << "\nAVAILABLE VOUCHERS\n";
+                    cout << "1. SAVE10 - 10% off (min. spend RM50)\n";
+                    cout << "2. SAVE30 - 30% off (min. spend RM150)\n";
+                    cout << "3. FREESHIP - Free delivery (min. spend RM30)\n";
+                    cout << "Choose a voucher: ";
+                    cin >> voucherOption;
+
+                    if (cin.fail()) {
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        cout << "Invalid voucher selection. No voucher applied.\n";
+                    } else if (voucherOption == 1) {
+                        if (subtotal >= 50.00) {
+                            discount = subtotal * 0.10;
+                            voucherName = "SAVE10";
+                            cout << "SAVE10 applied!\n";
+                        } else {
+                            cout << "SAVE10 needs a subtotal of at least RM50. No voucher applied.\n";
+                        }
+                    } else if (voucherOption == 2) {
+                        if (subtotal >= 150.00) {
+                            discount = subtotal * 0.30;
+                            voucherName = "SAVE30";
+                            cout << "SAVE30 applied!\n";
+                        } else {
+                            cout << "SAVE30 needs a subtotal of at least RM150. No voucher applied.\n";
+                        }
+                    } else if (voucherOption == 3) {
+                        if (subtotal >= 30.00) {
+                            deliveryFee = 0.00;
+                            voucherName = "FREESHIP";
+                            cout << "FREESHIP applied!\n";
+                        } else {
+                            cout << "FREESHIP needs a subtotal of at least RM30. No voucher applied.\n";
+                        }
+                    } else {
+                        cout << "Invalid voucher selection. No voucher applied.\n";
+                    }
+                } else if (voucher == 'N' || voucher == 'n') {
+                    cout << "No voucher applied.\n";
+                } else {
+                    cout << "Please enter Y or N.\n";
+                    continue;
+                }
+
+                double total = subtotal - discount + deliveryFee;
 
                 int payment;
                 cout << "\nPAYMENT METHOD\n";
@@ -349,6 +405,8 @@ int main() {
                 cout << "Product: " << product << '\n';
                 cout << "Quantity: " << quantity << '\n';
                 cout << "Subtotal: RM" << subtotal << '\n';
+                cout << "Voucher: " << voucherName << '\n';
+                cout << "Discount: RM" << discount << '\n';
                 cout << "Delivery: " << destination << '\n';
                 cout << "Delivery fee: RM" << deliveryFee << '\n';
                 cout << "Total: RM" << total << '\n';
